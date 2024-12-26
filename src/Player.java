@@ -53,7 +53,7 @@ class Player {
         System.out.println("Сумма: " + sum + "/21");
     }
     // Сумма очков
-    public int getTotalValue() {
+    protected int getTotalValue() {
         int sum = 0;
         for (Card card : hand) {
             sum += card.getValue();
