@@ -6,15 +6,32 @@ class AdvancedPlayer extends Player {
         this.strategyLevel = strategyLevel;
     }
 
-    // Метод для принятия решения на основе уровня стратегии
+    // Перегрузка метода reshenie_ai() с параметром
+    public boolean reshenie_ai(boolean useBaseLogic) {
+        if (useBaseLogic) {
+            // Вызов метода базового класса
+            return super.reshenie_ai(); // Используем базовую логику
+        } else {
+            // Собственная логика без вызова базового класса
+            int totalValue = this.getTotalValue();
+            if (strategyLevel == 1) {
+                return totalValue < 17; // Простая стратегия
+            } else if (strategyLevel == 2) {
+                return totalValue < 18; // Более агрессивная стратегия
+            }
+            return false; // Остановиться в других случаях
+        }
+    }
+
+    // Перегрузка метода reshenie_ai() без параметров
     @Override
     public boolean reshenie_ai() {
+        // Используем собственную логику
         int totalValue = this.getTotalValue();
         if (strategyLevel == 1) {
-            // Простая стратегия: брать карту, если меньше 17
-            return totalValue < 17;
+            return totalValue < 17; // Простая стратегия
         } else if (strategyLevel == 2) {
-            return totalValue < 18; // например, более агрессивная стратегия
+            return totalValue < 18; // Более агрессивная стратегия
         }
         return false; // Остановиться в других случаях
     }

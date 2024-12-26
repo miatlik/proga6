@@ -95,7 +95,7 @@ class Player {
         return new GameResult(resultMessage);
     }
     // Простейший искусственный интеллект для противника, который берет карту, если у него меньше 17 очков
-    public boolean reshenie_ai() {
+    protected boolean reshenie_ai() {
         return this.getTotalValue() < 17; // Возвращаем true (взять карту) или false (остановиться)
     }
 
