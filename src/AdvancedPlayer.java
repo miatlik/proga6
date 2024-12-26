@@ -1,8 +1,8 @@
 class AdvancedPlayer extends Player {
     private int strategyLevel; // Уровень стратегии игрока (например, 1 - простая, 2 - сложная)
 
-    public AdvancedPlayer(int strategyLevel) {
-        super(); // Вызов конструктора базового класса
+    public AdvancedPlayer(int strategyLevel, int initialCards) {
+        super(initialCards); // Вызов конструктора базового класса с параметрами
         this.strategyLevel = strategyLevel;
     }
 

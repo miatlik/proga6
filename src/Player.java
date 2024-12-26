@@ -4,9 +4,19 @@ import java.util.List;
 class Player {
     private List<Card> hand; // Список для хранения карт
 
-    public Player() {
+    // Новый конструктор с параметрами
+    public Player(int initialCards) {
         hand = new ArrayList<>();
+        for (int i = 0; i < initialCards; i++) {
+            // Добавляем карты по умолчанию, например, 1
+            ruka(1);
+        }
     }
+
+    public Player() {
+        this(0); // Вызываем новый конструктор с 0 картами
+    }
+
     // Получение карты в руку игрока
     public void ruka(int cardValue) {
         try {

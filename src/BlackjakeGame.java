@@ -11,8 +11,8 @@ public class BlackjakeGame {
             boolean playAgain1 = true;
             boolean playAgain2 = true;
             Deck deck = new Deck();
-            Player player = new Player(); // Игрок
-            AdvancedPlayer opponent = new AdvancedPlayer(2); // Противник
+            Player player = new Player(0); // Игрок
+            AdvancedPlayer opponent = new AdvancedPlayer(2,0); // Противник
             deck.vvodkolodi();
             // Начальная раздача карт
             player.ruka(deck.viborkarti());
