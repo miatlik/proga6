@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Player {
+class Player implements Cloneable {
     private List<Card> hand; // Список для хранения карт
 
     // Новый конструктор с параметрами
@@ -12,7 +12,20 @@ class Player {
             ruka(1);
         }
     }
+    // Мелкое клонирование
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone(); // Мелкое клонирование
+    }
 
+    // Глубокое клонирование
+    public Player deepClone() {
+        Player clonedPlayer = new Player(0);
+        for (Card card : this.hand) {
+            clonedPlayer.ruka(card.getValue()); // Клонируем карты
+        }
+        return clonedPlayer;
+    }
     public Player() {
         this(0); // Вызываем новый конструктор с 0 картами
     }

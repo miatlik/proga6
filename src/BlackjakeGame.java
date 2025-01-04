@@ -11,19 +11,43 @@ public class BlackjakeGame {
             boolean playAgain1 = true;
             boolean playAgain2 = true;
             Deck deck = new Deck();
-            Player player = new Player(0); // Игрок
+            Player originalPlayer = new Player(0); // Игрок
             AdvancedPlayer opponent = new AdvancedPlayer(2,0); // Противник
             deck.vvodkolodi();
             // Начальная раздача карт
-            player.ruka(deck.viborkarti());
-            player.ruka(deck.viborkarti());
+            originalPlayer.ruka(deck.viborkarti());
             opponent.ruka(deck.viborkarti());
             opponent.ruka(deck.viborkarti());
+            //Клонирование
+            try {
+
+                Player shallowClone = (Player) originalPlayer.clone();
+                Player deepClone = originalPlayer.deepClone();
+                System.out.println("Мелкое клонирование:");
+                System.out.println("Оригинальный игрок: " + originalPlayer.getTotalValue());
+                System.out.println("Клонированный игрок: " + shallowClone.getTotalValue());
+
+                System.out.println("\nГлубокое клонирование:");
+                System.out.println("Оригинальный игрок: " + originalPlayer.getTotalValue());
+                System.out.println("Глубоко клонированный игрок: " + deepClone.getTotalValue());
+
+                originalPlayer.ruka(deck.viborkarti());
+                System.out.println("\nПосле изменения оригинала:");
+                System.out.println("Оригинальный игрок: " + originalPlayer.getTotalValue());
+                System.out.println("Клонированный игрок: " + shallowClone.getTotalValue()); // Эта сумма изменится
+
+                System.out.println("\nПосле изменения оригинала:");
+                System.out.println("Оригинальный игрок: " + originalPlayer.getTotalValue());
+                System.out.println("Глубоко клонированный игрок: " + deepClone.getTotalValue()); // Эта сумма не изменится
+
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
             System.out.println("Количество созданных колод: " + Deck.getDeckCount());
             // Основная игра
             while (playAgain1==true || playAgain2==true) {
                 // Отображение карт
-                player.myvivod();
+                originalPlayer.myvivod();
                 opponent.opvivodhide();
                 //Выбор игрока
                 if (playAgain1==true) {
@@ -31,10 +55,10 @@ public class BlackjakeGame {
                     System.out.println("Нажмите 2, чтобы спасовать");
                     int choice = getPlayerChoice();
 
-                    if (choice == 1 && player.getTotalValue() <= 21) {
-                        player.ruka(deck.viborkarti());
+                    if (choice == 1 && originalPlayer.getTotalValue() <= 21) {
+                        originalPlayer.ruka(deck.viborkarti());
                     }
-                    else if(choice == 2 || player.getTotalValue() > 21){
+                    else if(choice == 2 || originalPlayer.getTotalValue() > 21){
                         System.out.println("Вы спасовали");
                         playAgain1=false;
                     }
@@ -51,10 +75,10 @@ public class BlackjakeGame {
             }
             // Вывод результатов
             if (playAgain1==false && playAgain2==false) {
-                player.myvivod(); // Полное отображение карт игрока
+                originalPlayer.myvivod(); // Полное отображение карт игрока
                 opponent.opvivodopen(); // Полное отображение карт противника
                 // Оценка игры
-                GameResult result = player.vivodrez(opponent);
+                GameResult result = originalPlayer.vivodrez(opponent);
                 System.out.println(result.getResultMessage());
             }
             System.out.println("\nНажмите q, чтобы выйти или любую другую клавишу, чтобы сыграть заново");
