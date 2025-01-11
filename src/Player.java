@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 class Player implements Cloneable {
     private List<Card> hand; // Список для хранения карт
@@ -11,6 +13,10 @@ class Player implements Cloneable {
             // Добавляем карты по умолчанию, например, 1
             ruka(1);
         }
+    }
+    // Метод для сортировки карт по значению
+    public void sortHand() {
+        Collections.sort(hand, Comparator.comparingInt(Card::getValue));
     }
     // Мелкое клонирование
     @Override
@@ -49,6 +55,7 @@ class Player implements Cloneable {
     public void myvivod() {
         int sum = 0;
         System.out.print("\nМои карты: ");
+        sortHand();
         for (Card card : hand) {
             System.out.print(card.getValue() + ", ");
             sum += card.getValue();
