@@ -128,5 +128,13 @@ class Player implements Cloneable {
     protected boolean reshenie_ai() {
         return this.getTotalValue() < 17; // Возвращаем true (взять карту) или false (остановиться)
     }
-
+    // Метод для поиска карты по значению
+    public boolean hasCard(int cardValue) {
+        for (Card card : hand) {
+            if (card.getValue() == cardValue) {
+                return true; // Карта найдена
+            }
+        }
+        return false; // Карта не найдена
+    }
 }
