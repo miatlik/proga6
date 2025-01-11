@@ -1,18 +1,26 @@
 import java.util.Random;
 import java.util.Scanner;
-
+import java.util.ArrayList;
+import java.util.List;
 public class BlackjakeGame {
     private static final int MAX_CARDS = 11; // Максимальное количество карт
     private static Scanner scanner = new Scanner(System.in);
     private static Random random = new Random();
+    // Контейнер для хранения игроков
+    private static List<Player> players = new ArrayList<>();
     public static void main(String[] args) {
         char ch;
         do {
             boolean playAgain1 = true;
             boolean playAgain2 = true;
             Deck deck = new Deck();
+            // Создание игроков
             Player originalPlayer = new Player(0); // Игрок
-            AdvancedPlayer opponent = new AdvancedPlayer(2,0); // Противник
+            AdvancedPlayer opponent = new AdvancedPlayer(2, 0); // Противник
+
+            // Добавление игроков в контейнер
+            players.add(originalPlayer);
+            players.add(opponent);
             deck.vvodkolodi();
             // Начальная раздача карт
             originalPlayer.ruka(deck.viborkarti());
